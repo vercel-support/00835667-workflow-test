@@ -1,3 +1,4 @@
+import { waitUntil } from "@vercel/functions";
 import { start } from "workflow/api";
 import { testWorkflow } from "@/workflows/example";
 
@@ -7,7 +8,8 @@ export default function Home() {
       <form
         action={async () => {
           "use server";
-          start(testWorkflow, {});
+          // alternatively `await start(testWorkflow, {});`
+          waitUntil(start(testWorkflow, {}));
         }}
       >
         <button
